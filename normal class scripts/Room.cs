@@ -6,15 +6,31 @@ public class Room
 {
     private string name;
 
-    private string[] theOpenDoors = new string[4];
-    private int howManyOpenDoors = 0;
-
     private Exit[] theExits = new Exit[4];
     private int howManyExits = 0;
+    private Player currentPlayer;
 
     public Room(string name)
     {
         this.name = name;
+        this.currentPlayer = null;
+    }
+
+    public void addPlayer(Player thePlayer)
+    {
+        this.currentPlayer = thePlayer;
+    }
+
+    public bool hasExit(string direction)
+    {
+        for(int i = 0; i < this.howManyExits; i++)
+        {
+            if(this.theExits[i].getDirection().Equals(direction))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addExit(string direction, Room destinationRoom)
@@ -25,23 +41,5 @@ public class Room
             this.theExits[this.howManyExits] = e;
             this.howManyExits++;
         }
-    }
-
-    public void setOpenDoor(string direction)
-    {
-        this.theOpenDoors[this.howManyOpenDoors] = direction;
-        this.howManyOpenDoors++;
-    }
-
-    public bool isOpenDoor(string direction)
-    {
-        for(int i = 0; i < this.howManyOpenDoors; i++)
-        {
-            if(direction.Equals(this.theOpenDoors[i]))
-            {
-                return true;
-            }
-        }
-        return false; //whatever direction you wanted to go, does NOT have an open door
     }
 }

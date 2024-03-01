@@ -6,6 +6,8 @@ public class Dungeon
 {
     private string name;
     private Room startRoom;
+    private Room currentRoom;
+    private Player thePlayer;
 
     public Dungeon(string name)
     {
@@ -15,5 +17,11 @@ public class Dungeon
     public void setStartRoom(Room r)
     {
         this.startRoom = r;
+    }
+
+    public void addPlayer(Player thePlayer)
+    {
+        this.thePlayer = thePlayer;
+        this.startRoom.addPlayer(this.thePlayer);
     }
 }
