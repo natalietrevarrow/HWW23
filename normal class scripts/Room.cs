@@ -19,6 +19,7 @@ public class Room
     public void addPlayer(Player thePlayer)
     {
         this.currentPlayer = thePlayer;
+        this.currentPlayer.setCurrentRoom(this);
     }
 
     public bool hasExit(string direction)
