@@ -105,7 +105,14 @@ public class PlayerController : MonoBehaviour
         {
             print("Loading scene");
 
+            //remove the player from the current room and place him into the destination, prior to loading the new scene
+            MySingleton.thePlayer.getCurrentRoom().removePlayer(MySingleton.currentDirection);
+
             EditorSceneManager.LoadScene("DungeonRoom");
+        }
+        else if(other.CompareTag("power-pellet"))
+        {
+            other.gameObject.SetActive(false); //make pellet disappear
         }
         else if(other.CompareTag("middleOfTheRoom") && !MySingleton.currentDirection.Equals("?"))
         {
