@@ -51,7 +51,7 @@ public class Room
         }
     }
 
-    public void removePellet(string direction)
+    public void removePellet(string direction //why isnt the wrong pellet going away!!!
     {
         if (direction.Equals("north"))
         {
@@ -79,24 +79,33 @@ public class Room
     {
         if (direction.Equals("north"))
         {
-            return this.northPellet != null //make an error
+            return this.northPellet != null;
         }
         else if (direction.Equals("south"))
         {
-            this.southPellet = null;
+            if (this.southPellet != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else if (direction.Equals("east"))
         {
-            this.eastPellet = null;
+            return this.eastPellet != null;
         }
         else if (direction.Equals("west"))
         {
-            this.westPellet = null;
+            return this.westPellet != null;
         }
         else
         {
-            Debug.Log("Not a valid pellet direction to remove!!!!!!");
+            Debug.Log("Not a valid pellet direction to check!!!!!!");
+            return false;
         }
+        
     }
     //remove the current player from this room
     public void removePlayer(string direction)
@@ -139,6 +148,23 @@ public class Room
             Exit e = new Exit(direction, destinationRoom);
             this.theExits[this.howManyExits] = e;
             this.howManyExits++;
+
+            if(direction.Equals("north"))
+            {
+                this.northPellet = new ArmorPellet();
+            }
+            else if (direction.Equals("south"))
+            {
+                this.southPellet = new ArmorPellet();
+            }
+            else if (direction.Equals("east"))
+            {
+                this.eastPellet = new ArmorPellet();
+            }
+            else if (direction.Equals("west"))
+            {
+                this.westPellet = new ArmorPellet();
+            }
         }
     }
 }

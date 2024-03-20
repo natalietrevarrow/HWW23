@@ -112,7 +112,11 @@ public class PlayerController : MonoBehaviour
         }
         else if(other.CompareTag("power-pellet"))
         {
-            other.gameObject.SetActive(false); //make pellet disappear
+            other.gameObject.SetActive(false); //visually make pellet disappear
+
+            //programatically  make sure the pellet doesnt show up again
+            Room theCurrentRoom = MySingleton.thePlayer.getCurrentRoom();
+            theCurrentRoom.removePellet(MySingleton.currentDirection);
         }
         else if(other.CompareTag("middleOfTheRoom") && !MySingleton.currentDirection.Equals("?"))
         {
