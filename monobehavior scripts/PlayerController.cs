@@ -116,12 +116,17 @@ public class PlayerController : MonoBehaviour
 
             //programatically  make sure the pellet doesnt show up again
             Room theCurrentRoom = MySingleton.thePlayer.getCurrentRoom();
-            theCurrentRoom.removePellet(MySingleton.currentDirection);
+            theCurrentRoom.removePellet(other.GetComponent<pelletController>().direction) //this is our code to fix the pellet...add ; to end of this line for error to go away
+
+           
+
+
         }
         else if(other.CompareTag("middleOfTheRoom") && !MySingleton.currentDirection.Equals("?"))
         {
             //we have hit the middle of the room, so lets turn off the collider
             //until the next run of the scene to avoid additional collisions
+
             this.middleOfTheRoom.SetActive(false);
             this.turnOnExits();
 

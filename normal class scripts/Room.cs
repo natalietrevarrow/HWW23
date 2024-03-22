@@ -51,7 +51,7 @@ public class Room
         }
     }
 
-    public void removePellet(string direction //why isnt the wrong pellet going away!!!
+    public void removePellet(string direction)
     {
         if (direction.Equals("north"))
         {
