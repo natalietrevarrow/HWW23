@@ -11,10 +11,14 @@ public class fightController : MonoBehaviour
     private Animator theCurrentAnimator;
     private Monster theMonster;
     private bool shouldAttack = true;
+    private AudioSource attackSound;
+    public TextMeshPro fightCommentaryTMP;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.fightCommentaryTMP.text = "";
+        this.attackSound = this.gameObject.GetComponent<AudioSource>();
         this.theMonster = new Monster("Pink Ghost");
         this.hero_hp_TMP.text = "Current HP: " + MySingleton.thePlayer.getHP() + " AC: " + MySingleton.thePlayer.getAC();
         this.monster_hp_TMP.text = "Current HP: " + this.theMonster.getHP() + " AC: " + this.theMonster.getAC();
@@ -34,23 +38,28 @@ public class fightController : MonoBehaviour
 
     private void tryAttack(Inhabitant attacker, Inhabitant defender)
     {
+        this.fightCommentaryTMP.text = "";
         //have attacker try to attack the defender
         int attackRoll = Random.Range(0, 20)+1;
         if(attackRoll >= defender.getAC())
         {
             //attacker will hit the defender, lets see how hard!!!!
             int damageRoll = Random.Range(0, 4) + 2; //damage between 2 and 5
+            this.fightCommentaryTMP.color = Color.red;
+            this.fightCommentaryTMP.text = "Attack hits for " + damageRoll;
             defender.takeDamage(damageRoll);
+            this.attackSound.Play();
         }
         else
         {
-            print("Attacker Misses!!!!");
+            this.fightCommentaryTMP.color = Color.blue;
+            this.fightCommentaryTMP.text = "Attack Misses!!!";
         }
     }
 
     IEnumerator fight()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         if (this.shouldAttack)
         {
             this.theCurrentAnimator = this.currentAttacker.GetComponent<Animator>();
@@ -64,7 +73,8 @@ public class fightController : MonoBehaviour
                 //now the defender may have fewer hp...check if their are dead?
                 if (this.theMonster.getHP() <= 0)
                 {
-                    print("Hero Wins!!!!!");
+                    this.monster_GO.transform.Rotate(-90, 0, 0);
+                    this.fightCommentaryTMP.text = "Hero Wins!!!";
                     this.shouldAttack = false;
                 }
                 else
@@ -82,7 +92,8 @@ public class fightController : MonoBehaviour
                 //now the defender may have fewer hp...check if their are dead?
                 if (MySingleton.thePlayer.getHP() <= 0)
                 {
-                    print("Monster Wins!!!!!");
+                    this.hero_GO.transform.Rotate(-90, 0, 0);
+                    this.fightCommentaryTMP.text = "Monster Wins!!!!!";
                     this.shouldAttack = false;
                 }
                 else
