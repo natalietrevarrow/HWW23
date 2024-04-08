@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public TextMeshPro pellet_TMP;
     public GameObject northExit;
     public GameObject southExit;
     public GameObject eastExit;
@@ -34,6 +36,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //set the current pellet count for the player
+        this.pellet_TMP.text = "" + MySingleton.currentPellets;
         //Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
 
         //disable all exits when the scene first loads
