@@ -37,6 +37,22 @@ public abstract class Inhabitant
         return this.hp;
     }
 
+    public void addHP(int numHP)
+    {
+        if(numHP > 0)
+        {
+            this.hp += numHP;
+            //this.hp = this.hp + numHP;
+            //dont let our player have more than max hit points to protect against over healing
+            if (this.hp > this.maxHP)
+            {
+                this.hp = this.maxHP;
+            }
+        }
+
+        
+    }
+
     public int getAC()
     {
         return this.ac;
