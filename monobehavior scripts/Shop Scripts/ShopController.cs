@@ -122,6 +122,35 @@ public class ShopController : MonoBehaviour
         this.playerTMP.text = "Pellets: " + MySingleton.currentPellets + "(HP: " + MySingleton.thePlayer.getHP() + ")"; ;
     }
 
+    void shopDisplay()
+    {
+        Gameobject rightButton;
+        Gameobject leftButton;
+        Gameobject currentPage;
+        int pageNum = 1;
+        int itemID;
+
+        for(int itemID = 1; itemID < 5; itemID = itemID + 1)
+        {
+            print(Item)
+            print(pageNum);
+            if(itemID % 4 == 0)
+            {
+                pageNum = pageNum + 1;
+            }
+            print(rightButton);
+            print(leftButton);
+            void TaskOnClick(rightButton)
+            {
+                pageNum = pageNum + 1;
+            }
+            void TaskOnClick(leftButton)
+            {
+                pageNum = pageNum - 1;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
